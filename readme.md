@@ -1,0 +1,1 @@
+Suaran memposisikan diri sebagai tempat buat baca artikel, jurnal akademik, dan dokumentasi pengetahuan dalam satu situs. Artikelnya ditulis oleh “Redaksi Suaran” dengan merujuk ke sumber kredibel (Britannica, NASA, UNESCO, WHO, IMF, Stanford Encyclopedia of Philosophy, dll). Hero-nya bilang: “Pengetahuan, ditulis untuk dipahami.”
