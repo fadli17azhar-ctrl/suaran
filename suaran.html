@@ -1,0 +1,1138 @@
+    <!DOCTYPE html>
+  <html lang="id">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suaran</title>
+  <meta name="description" content="Suaran adalah jurnal dan ensiklopedia digital berisi artikel, jurnal, dan dokumentasi pengetahuan lintas topik.">
+  <style>
+
+  :root {
+    --color-white: #FFFFFF;
+    --color-bg: #F7F7F7;
+    --color-black: #111111;
+    --color-dark-gray: #222222;
+    --color-gray: #666666;
+    --color-medium-gray: #999999;
+    --color-light-gray: #E5E5E5;
+    --color-border: #E0E0E0;
+    --color-accent: #7A2020;
+    --color-accent-dark: #5C1818;
+
+    --font-serif: Georgia, "Times New Roman", Times, serif;
+    --font-sans: Arial, Helvetica, "Segoe UI", sans-serif;
+
+    --max-width: 1240px;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.75rem;
+    --space-lg: 3rem;
+    --space-xl: 5rem;
+
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--color-dark-gray);
+    background: var(--color-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  ul, ol { padding-left: 1.25rem; }
+  h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--color-black); margin: 0 0 var(--space-sm); line-height: 1.25; font-weight: 700; }
+  p { margin: 0 0 var(--space-sm); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+  .visually-hidden { position: absolute; left: -9999px; }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---------- Utility bar ---------- */
+  .utility-bar {
+    background: var(--color-black);
+    color: var(--color-light-gray);
+    font-size: 0.8rem;
+  }
+  .utility-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 34px;
+  }
+  .utility-bar a { color: var(--color-light-gray); opacity: 0.85; }
+  .utility-bar a:hover { opacity: 1; text-decoration: underline; }
+  .utility-links { display: flex; gap: var(--space-md); }
+
+  /* ---------- Site header ---------- */
+  .site-header {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 0;
+    gap: var(--space-md);
+  }
+  .brand { display: flex; flex-direction: column; }
+  .brand-name {
+    font-family: var(--font-serif);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--color-black);
+    letter-spacing: 0.5px;
+  }
+  .brand-tagline {
+    font-size: 0.72rem;
+    color: var(--color-gray);
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+  }
+
+  .main-nav { display: flex; }
+  .main-nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: var(--space-md); }
+  .main-nav a {
+    font-size: 0.94rem;
+    color: var(--color-dark-gray);
+    padding: 0.4rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .main-nav a:hover, .main-nav a.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+  .header-actions { display: flex; align-items: center; gap: 0.6rem; }
+  .icon-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .icon-btn:hover { background: var(--color-bg); border-color: var(--color-medium-gray); }
+  .icon-btn svg { width: 17px; height: 17px; stroke: var(--color-dark-gray); }
+
+  .btn {
+    display: inline-block;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--color-dark-gray);
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover { border-color: var(--color-gray); }
+  .btn-primary { background: var(--color-black); border-color: var(--color-black); color: var(--color-white); }
+  .btn-primary:hover { background: var(--color-accent); border-color: var(--color-accent); }
+  .btn-outline { background: transparent; }
+  .btn-text { border: none; padding: 0.55rem 0.2rem; color: var(--color-accent); }
+  .btn-text:hover { text-decoration: underline; }
+  .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.82rem; }
+
+  .hamburger { display: none; background: none; border: none; padding: 0.4rem; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--color-black); margin: 5px 0; }
+
+  /* ---------- Search area ---------- */
+  .search-area { background: var(--color-bg); border-bottom: 1px solid var(--color-border); padding: var(--space-md) 0; }
+  .search-form { display: flex; gap: 0.6rem; max-width: 760px; margin: 0 auto; }
+  .search-form input[type="search"] {
+    flex: 1;
+    padding: 0.85rem 1.1rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    font-family: var(--font-sans);
+  }
+  .search-form input[type="search"]:focus { border-color: var(--color-accent); }
+  .search-form button {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0 1.4rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+  }
+  .search-form button:hover { background: var(--color-accent); }
+  .search-form button svg { width: 15px; height: 15px; stroke: var(--color-white); fill: none; }
+  .search-hint { text-align: center; font-size: 0.82rem; color: var(--color-gray); margin-top: 0.7rem; margin-bottom: 0; }
+
+  /* ---------- Section shell ---------- */
+  .section { padding: var(--space-xl) 0; }
+  .section-alt { background: var(--color-bg); }
+  .section-header { margin-bottom: var(--space-lg); max-width: 620px; }
+  .section-header h2 { font-size: 1.85rem; }
+  .section-header p { color: var(--color-gray); margin-bottom: 0; }
+  .section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .section-top .section-header { margin-bottom: 0; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: var(--space-xl) 0 var(--space-lg); border-bottom: 1px solid var(--color-border); }
+  .hero-inner { max-width: 720px; }
+  .hero h1 {
+    font-size: 2.9rem;
+    margin-bottom: var(--space-sm);
+  }
+  .hero-sub { font-size: 1.1rem; color: var(--color-gray); max-width: 600px; margin-bottom: var(--space-md); }
+  .hero-actions { display: flex; gap: 0.8rem; }
+
+  /* ---------- Category label ---------- */
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ---------- Article grid & cards ---------- */
+  .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+  .article-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .article-card:hover { border-color: var(--color-medium-gray); box-shadow: var(--shadow-soft); }
+  .article-card .image-placeholder { margin: -1.75rem -1.75rem var(--space-sm); border-radius: var(--radius-md) var(--radius-md) 0 0; height: 150px; }
+  .article-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .article-card h3 a:hover { color: var(--color-accent); }
+  .article-card p { color: var(--color-gray); font-size: 0.93rem; flex: 1; }
+  .article-meta { font-size: 0.8rem; color: var(--color-medium-gray); display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; margin: 0.6rem 0; }
+  .article-meta span:not(:last-child)::after { content: "•"; margin-left: 0.6rem; color: var(--color-light-gray); }
+  .article-card .btn-text { padding-left: 0; align-self: flex-start; }
+
+  .image-placeholder {
+    background: var(--color-bg);
+    border: 1px dashed var(--color-light-gray);
+    color: var(--color-medium-gray);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    min-height: 150px;
+  }
+
+  /* Latest articles list */
+  .article-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--color-border); }
+  .article-list-item {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+  }
+  .article-list-item:nth-child(odd) { padding-right: var(--space-md); border-right: 1px solid var(--color-border); }
+  .article-list-item:nth-child(even) { padding-left: var(--space-md); }
+  .article-list-item h3 { font-size: 1.08rem; margin-bottom: 0.4rem; }
+  .article-list-item h3 a:hover { color: var(--color-accent); }
+  .article-list-item p { color: var(--color-gray); font-size: 0.91rem; margin-bottom: 0.5rem; }
+
+  /* Popular list */
+  .popular-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-border); }
+  .popular-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .popular-rank { font-family: var(--font-serif); font-size: 1.6rem; color: var(--color-light-gray); width: 46px; flex-shrink: 0; }
+  .popular-item h3 { font-size: 1.05rem; margin-bottom: 0.2rem; }
+  .popular-item h3 a:hover { color: var(--color-accent); }
+  .popular-item .article-meta { margin: 0; }
+
+  /* Categories */
+  .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-sm); }
+  .category-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .category-card:hover { border-color: var(--color-accent); background: var(--color-bg); }
+  .category-card .cat-name { font-weight: 700; color: var(--color-black); font-size: 0.98rem; }
+  .category-card .cat-count { font-size: 0.8rem; color: var(--color-medium-gray); }
+
+  /* Journal cards */
+  .journal-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+  .journal-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    background: var(--color-white);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-md);
+    align-items: center;
+  }
+  .journal-card:hover { border-color: var(--color-medium-gray); }
+  .journal-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-accent-dark);
+    border: 1px solid var(--color-accent-dark);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+  }
+  .journal-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; font-style: italic; }
+  .journal-meta { font-size: 0.85rem; color: var(--color-gray); margin-bottom: 0; }
+  .journal-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+
+  /* Statistics */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); text-align: center; }
+  .stat-number { font-family: var(--font-serif); font-size: 2.6rem; color: var(--color-black); font-weight: 700; }
+  .stat-label { font-size: 0.85rem; color: var(--color-gray); margin-top: 0.2rem; }
+
+  /* Newsletter */
+  .newsletter { background: var(--color-black); color: var(--color-light-gray); padding: var(--space-xl) 0; }
+  .newsletter-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+  .newsletter h2 { color: var(--color-white); }
+  .newsletter p { color: var(--color-medium-gray); }
+  .newsletter-form { display: flex; gap: 0.6rem; margin-top: var(--space-md); }
+  .newsletter-form input { flex: 1; padding: 0.8rem 1rem; border: 1px solid var(--color-dark-gray); border-radius: var(--radius-sm); background: var(--color-dark-gray); color: var(--color-white); }
+  .newsletter-form input::placeholder { color: var(--color-medium-gray); }
+  .newsletter-form button { padding: 0 1.4rem; background: var(--color-white); color: var(--color-black); border: none; border-radius: var(--radius-sm); font-size: 0.95rem; }
+  .newsletter-form button:hover { background: var(--color-accent); color: var(--color-white); }
+  .newsletter-disclaimer { font-size: 0.78rem; color: var(--color-medium-gray); margin-top: 0.8rem; }
+
+  /* ---------- Footer ---------- */
+  .site-footer { background: var(--color-bg); border-top: 1px solid var(--color-border); padding: var(--space-xl) 0 var(--space-md); }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-lg); }
+  .footer-brand .brand-name { font-size: 1.5rem; }
+  .footer-brand p { color: var(--color-gray); font-size: 0.9rem; margin-top: 0.6rem; }
+  .footer-col h4 { font-family: var(--font-sans); font-size: 0.85rem; text-transform: none; color: var(--color-black); margin-bottom: var(--space-sm); }
+  .footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+  .footer-col a { color: var(--color-gray); font-size: 0.9rem; }
+  .footer-col a:hover { color: var(--color-accent); }
+  .footer-bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .footer-bottom p { margin: 0; font-size: 0.85rem; color: var(--color-medium-gray); }
+  .social-links { display: flex; gap: 0.6rem; }
+  .social-links a {
+    width: 34px; height: 34px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .social-links a:hover { border-color: var(--color-accent); }
+  .social-links svg { width: 15px; height: 15px; stroke: var(--color-dark-gray); }
+
+  /* =========================================================
+    ARTICLE PAGE
+    ========================================================= */
+  .breadcrumb { font-size: 0.85rem; color: var(--color-medium-gray); padding: var(--space-md) 0 0; }
+  .breadcrumb a:hover { color: var(--color-accent); }
+
+  .article-header { padding: var(--space-md) 0 var(--space-lg); border-bottom: 1px solid var(--color-border); }
+  .article-header h1 { font-size: 2.4rem; max-width: 820px; }
+  .article-header .hero-sub { font-size: 1.05rem; max-width: 760px; }
+  .article-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    font-size: 0.88rem;
+    color: var(--color-gray);
+    margin: var(--space-sm) 0;
+  }
+  .article-info span:not(:last-child)::after { content: "•"; margin-left: 1rem; color: var(--color-light-gray); }
+  .article-tools { display: flex; gap: 0.6rem; margin-top: var(--space-sm); }
+  .tool-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    background: var(--color-white);
+  }
+  .tool-btn:hover { border-color: var(--color-medium-gray); background: var(--color-bg); }
+  .tool-btn svg { width: 14px; height: 14px; stroke: var(--color-dark-gray); fill: none; }
+
+  .article-layout { display: grid; grid-template-columns: 7fr 3fr; gap: var(--space-xl); padding: var(--space-lg) 0; align-items: start; }
+
+  .article-body h2 { font-size: 1.5rem; margin-top: var(--space-lg); }
+  .article-body h3 { font-size: 1.2rem; margin-top: var(--space-md); }
+  .article-body p { max-width: 68ch; color: var(--color-dark-gray); }
+  .article-body blockquote {
+    margin: var(--space-md) 0;
+    padding: var(--space-sm) var(--space-md);
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-bg);
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-dark-gray);
+    max-width: 68ch;
+  }
+  .article-body ul, .article-body ol { max-width: 66ch; color: var(--color-dark-gray); margin-bottom: var(--space-sm); }
+  .article-body li { margin-bottom: 0.4rem; }
+  .article-body figure { margin: var(--space-md) 0; max-width: 68ch; }
+  .article-body figcaption { font-size: 0.82rem; color: var(--color-gray); margin-top: 0.5rem; }
+  .article-table { border-collapse: collapse; width: 100%; max-width: 68ch; margin: var(--space-sm) 0 var(--space-md); font-size: 0.92rem; }
+  .article-table th, .article-table td { border: 1px solid var(--color-border); padding: 0.6rem 0.8rem; text-align: left; }
+  .article-table th { background: var(--color-bg); font-family: var(--font-sans); font-weight: 700; }
+
+  .references { border-top: 1px solid var(--color-border); margin-top: var(--space-lg); padding-top: var(--space-md); }
+  .references ol { list-style: none; padding: 0; margin: 0; max-width: 68ch; }
+  .references li { font-size: 0.9rem; color: var(--color-gray); margin-bottom: 0.6rem; padding-left: 1.6rem; text-indent: -1.6rem; }
+
+  /* Sidebar / TOC */
+  .sidebar { position: sticky; top: 84px; }
+  .toc-box, .sidebar-box {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    background: var(--color-white);
+  }
+  .toc-box h4, .sidebar-box h4 { font-family: var(--font-sans); font-size: 0.85rem; color: var(--color-black); margin-bottom: var(--space-sm); }
+  .toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; border-left: 2px solid var(--color-light-gray); }
+  .toc-list a { display: block; font-size: 0.88rem; color: var(--color-gray); padding-left: 0.8rem; }
+  .toc-list a:hover, .toc-list a.active { color: var(--color-accent); border-left: 2px solid var(--color-accent); margin-left: -2px; padding-left: calc(0.8rem - 0px); }
+  .meta-list { list-style: none; margin: 0; padding: 0; font-size: 0.87rem; color: var(--color-gray); }
+  .meta-list li { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid var(--color-border); }
+  .meta-list li:last-child { border-bottom: none; }
+  .meta-list strong { color: var(--color-black); font-weight: 700; }
+
+  /* Author card */
+  .author-card {
+    display: flex;
+    gap: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+    background: var(--color-bg);
+  }
+  .avatar-placeholder {
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--color-light-gray);
+    color: var(--color-medium-gray);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .author-card h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .author-card p { font-size: 0.9rem; color: var(--color-gray); margin: 0; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-md); }
+  .tag { font-size: 0.78rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.3rem 0.7rem; color: var(--color-gray); }
+  .tag:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+  .related-section { border-top: 1px solid var(--color-border); padding-top: var(--space-lg); margin-top: var(--space-lg); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .article-grid { grid-template-columns: repeat(2, 1fr); }
+    .article-list { grid-template-columns: 1fr; }
+    .article-list-item:nth-child(odd) { padding-right: 0; border-right: none; }
+    .article-list-item:nth-child(even) { padding-left: 0; }
+    .category-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .article-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; margin-top: var(--space-lg); }
+  }
+
+  @media (max-width: 760px) {
+    .main-nav { display: none; }
+    .hamburger { display: block; }
+    .header-actions .btn { display: none; }
+    .utility-bar { display: none; }
+    .article-grid { grid-template-columns: 1fr; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+    .footer-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+    .hero h1 { font-size: 2.1rem; }
+    .article-header h1 { font-size: 1.8rem; }
+    .journal-card { grid-template-columns: 1fr; }
+    .journal-actions { flex-direction: row; align-items: flex-start; }
+    .newsletter-form { flex-direction: column; }
+    .section { padding: var(--space-lg) 0; }
+    .search-form { flex-direction: column; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  .site-header.nav-open .main-nav {
+    display: block;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 1.5rem;
+  }
+  .site-header.nav-open .main-nav ul { flex-direction: column; gap: 0.9rem; }
+
+  </style>
+  </head>
+  <body>
+
+  <div class="utility-bar">
+    <div class="container">
+      <div class="utility-links">
+        <a href="#">Bahasa Indonesia</a>
+        <a href="#">Bantuan</a>
+      </div>
+      <div class="utility-links">
+        <a href="#">Pedoman Editorial</a>
+        <a href="#">Kontribusi</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#" data-view="home" class="brand">
+        <span class="brand-name">Suaran</span>
+        <span class="brand-tagline">Trending • Ensiklopedia • Pengetahuan • Berbagi Cerita</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <ul>
+          <li><a href="#" data-view="home" class="active">Beranda</a></li>
+          <li><a href="#">Artikel</a></li>
+          <li><a href="#">Jurnal</a></li>
+          <li><a href="#">Kategori</a></li>
+          <li><a href="#">Arsip</a></li>
+          <li><a href="#">Tentang</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Cari" id="searchToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="#" class="btn btn-outline btn-sm">Masuk</a>
+        <a href="#" class="btn btn-primary btn-sm">Daftar</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Buka menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+
+  <!-- =========================================================
+      HALAMAN BERANDA
+      ========================================================= -->
+  <div id="view-home" class="view-panel">
+
+  <section class="search-area">
+    <div class="container">
+      <form class="search-form" role="search" onsubmit="return false;">
+        <label for="mainSearch" class="visually-hidden">Cari</label>
+        <input type="search" id="mainSearch" placeholder="Cari artikel, jurnal, topik, pengetahuan, trending atau berbagi cerita...">
+        <button type="submit">
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Cari
+        </button>
+      </form>
+      <p class="search-hint">Temukan artikel, jurnal, berbagai pengetahuan, trending, dan berbagi cerita dalam satu tempat.</p>
+    </div>
+  </section>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>Pengetahuan, ditulis untuk dipahami.</h1>
+      <p class="hero-sub">Jelajahi kumpulan artikel, jurnal, dan tulisan informatif yang dikembangkan untuk membantu memahami berbagai topik.</p>
+      <div class="hero-actions">
+        <a href="#latest" class="btn btn-primary">Jelajahi Artikel</a>
+        <a href="#journal" class="btn btn-outline">Lihat Jurnal</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <h2>Artikel Pilihan</h2>
+        <p>Beberapa tulisan yang sedang menjadi perhatian.</p>
+      </div>
+      <div class="article-grid">
+
+        <article class="article-card">
+          <div class="image-placeholder">Gambar</div>
+          <span class="eyebrow">Sejarah</span>
+          <h3><a href="#" data-view="article">Ketika Sebuah Kota Mengubah Jalannya Sejarah</a></h3>
+          <p>Ada kota-kota yang bukan sekadar menjadi tempat manusia hidup, tetapi menjadi saksi lahirnya kekuasaan, konflik, perdagangan, dan perubahan besar dunia.</p>
+          <div class="article-meta">
+            <span>Encyclopaedia Britannica, Redaksi Suaran</span>
+            <span>28 September 2026</span>
+            <span>8 jam yang lalu</span>
+          </div>
+          <a href="#" data-view="article" class="btn-text">Baca artikel</a>
+        </article>
+
+        <article class="article-card">
+          <div class="image-placeholder">Gambar</div>
+          <span class="eyebrow">Sains</span>
+          <h3><a href="#" data-view="article">Seberapa Jauh Kita Benar-Benar Memahami Alam Semesta?</a></h3>
+          <p>Di balik miliaran bintang dan galaksi yang telah ditemukan, masih terdapat pertanyaan besar tentang asal-usul dan bagaimana alam semesta sebenarnya bekerja.</p>
+          <div class="article-meta">
+            <span>NASA Science, PKL In Suaran, wikipedia</span>
+            <span>28 September 2026</span>
+            <span>6 jam yang lalu</span>
+          </div>
+          <a href="#" data-view="article" class="btn-text">Baca artikel</a>
+        </article>
+
+        <article class="article-card">
+          <div class="image-placeholder">Gambar</div>
+          <span class="eyebrow">Filsafat</span>
+          <h3><a href="#" data-view="article">Bagaimana Kita Tahu Bahwa Apa yang Kita Percaya Itu Benar?</a></h3>
+          <p>Pertanyaan sederhana tentang pengetahuan ternyata membawa manusia pada persoalan tentang kebenaran, pengalaman, alasan, dan batas kemampuan kita untuk mengetahui sesuatu.</p>
+          <div class="article-meta">
+            <span>Stanford Encyclopedia of Philosophy, Suaran</span>
+            <span>28 September 2026</span>
+            <span>10 jam yang lalu</span>
+          </div>
+          <a href="#" data-view="article" class="btn-text">Baca artikel</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="latest">
+    <div class="container">
+      <div class="section-top">
+        <div class="section-header">
+          <h2>Artikel Terbaru</h2>
+          <p>Tulisan-tulisan yang baru saja diterbitkan oleh Suaran.com.</p>
+        </div>
+        <a href="#" class="btn-text">Lihat semua artikel</a>
+      </div>
+      <div class="article-list">
+
+        <div class="article-list-item">
+          <span class="eyebrow">Teknologi</span>
+          <h3><a href="#" data-view="article">AI Tak Lagi Cuma Menjawab, Kini Ia Bisa Menjalankan Pekerjaan</a></h3>
+          <p>Teknologi AI mulai bergeser dari sekadar menjawab pertanyaan menjadi agen yang dapat menggunakan alat, mengerjakan tugas berantai, dan bekerja dalam jangka panjang.</p>
+          <div class="article-meta"><span>OpenAI, Introducing the Agents API, Suaran</span><span>10 Sep 2026</span><span>10 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Budaya</span>
+          <h3><a href="#" data-view="article">Museum Mulai Memakai AI, Tapi Siapa yang Mengawasi Mesinnya?</a></h3>
+          <p>Survei UNESCO–ICOM terhadap lebih dari 400 museum di 90 negara menunjukkan 57% sudah menggunakan AI, sementara 55% belum memiliki kebijakan atau pedoman internal tentang penggunaannya.</p>
+          <div class="article-meta"><span>UNESCO & ICOM, Suaran</span><span>17 Sep 2026</span><span>5 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Ekonomi</span>
+          <h3><a href="#" data-view="article">Dunia Masih Tumbuh, Tapi Energi dan Utang Mulai Menghantui Ekonomi Global</a></h3>
+          <p>IMF memperkirakan ekonomi dunia tetap tumbuh sekitar 3% pada 2026, tetapi tingginya utang publik, mahalnya energi, dan ledakan kebutuhan listrik AI membuat prospek global tetap penuh risiko.</p>
+          <div class="article-meta"><span>International Monetary Fund, PKL In Suaran</span><span>1 Sep 2026</span><span>7 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Geografi</span>
+          <h3><a href="#" data-view="article">Ketika El Niño Mengubah Peta Risiko Dunia</a></h3>
+          <p>El Niño 2026 mendorong WHO meningkatkan perhatian terhadap risiko kesehatan yang berbeda-beda menurut wilayah, dari tekanan pada sistem kesehatan hingga ancaman terhadap kelompok yang paling rentan.</p>
+          <div class="article-meta"><span>World Health Organization, Global Public Health Situation Analysis</span><span>5 Sep 2026</span><span>6 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Politik</span>
+          <h3><a href="#" data-view="article">Dunia Berkumpul di New York Saat Retakan Global Makin Lebar</a></h3>
+          <p>Para pemimpin dunia berkumpul dalam Pekan Tingkat Tinggi Majelis Umum PBB 2026 ketika perang, perubahan iklim, ketimpangan, migrasi, dan masa depan AI menjadi bagian dari perdebatan global.</p>
+          <div class="article-meta"><span>United Nations, General Assembly High-level Week 2026.</span><span>23 Sep 2026</span><span>9 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Seni</span>
+          <h3><a href="#" data-view="article">Venice Kembali Menjadi Panggung Seni Dunia</a></h3>
+          <p>Biennale Arte 2026 menghadirkan lebih dari 100 partisipasi nasional di Venesia dalam pameran bertajuk In Minor Keys, yang berlangsung hingga November.</p>
+          <div class="article-meta"><span>La Biennale di Venezia, Biennale Arte, Suaran</span><span>22 Sep 2026</span><span>4 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Pendidikan</span>
+          <h3><a href="#" data-view="article">AI Masuk Kelas, Tapi Sekolah Belum Tentu Siap</a></h3>
+          <p>UNESCO memperingatkan bahwa sistem pendidikan sedang menghadapi perubahan besar akibat AI sementara banyak negara masih berjuang membangun aturan, kapasitas, dan pemahaman tentang bagaimana teknologi itu seharusnya digunakan.</p>
+          <div class="article-meta"><span>UNESCO, The algorithm in the room, Suaran</span><span>8 Sep 2026</span><span>7 jam yang lalu</span></div>
+        </div>
+
+        <div class="article-list-item">
+          <span class="eyebrow">Kesehatan</span>
+          <h3><a href="#" data-view="article">Dunia Mulai Bersiap Menghadapi Pandemi Berikutnya</a></h3>
+          <p>Para pemimpin dunia kembali berkomitmen memperkuat pencegahan dan kesiapsiagaan pandemi setelah pengalaman COVID-19 menunjukkan betapa mahalnya harga yang harus dibayar ketika dunia tidak siap.</p>
+          <div class="article-meta"><span>World Health Organization, Suaran</span><span>25 Sep 2026</span><span>5 jam yang lalu</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="popular">
+    <div class="container">
+      <div class="section-header">
+        <h2>Paling Banyak Dibaca</h2>
+        <p>Artikel yang paling banyak dikunjungi pembaca minggu ini.</p>
+      </div>
+      <ol class="popular-list">
+        <li class="popular-item">
+          <span class="popular-rank">01</span>
+          <div>
+            <h3><a href="#" data-view="article">Ketika Amerika dan Tiongkok Mulai Membuka Jalur Komunikasi Khusus untuk Risiko AI</a></h3>
+            <div class="article-meta"><span>Politik</span><span>120.480 pembaca</span></div>
+          </div>
+        </li>
+        <li class="popular-item">
+          <span class="popular-rank">02</span>
+          <div>
+            <h3><a href="#" data-view="article">Tujuh dari Sembilan Batas Planet Bumi Telah Terlampaui</a></h3>
+            <div class="article-meta"><span>Sains</span><span>90.210 pembaca</span></div>
+          </div>
+        </li>
+        <li class="popular-item">
+          <span class="popular-rank">03</span>
+          <div>
+            <h3><a href="#" data-view="article">AI Mulai Bekerja Tanpa Menunggu Perintah Manusia</a></h3>
+            <div class="article-meta"><span>Teknologi</span><span>80.055 pembaca</span></div>
+          </div>
+        </li>
+        <li class="popular-item">
+          <span class="popular-rank">04</span>
+          <div>
+            <h3><a href="#" data-view="article">Kalau AI Bisa Berpikir, Siapa yang Bertanggung Jawab atas Keputusannya?</a></h3>
+            <div class="article-meta"><span>Filsafat</span><span>70.402 pembaca</span></div>
+          </div>
+        </li>
+        <li class="popular-item">
+          <span class="popular-rank">05</span>
+          <div>
+            <h3><a href="#" data-view="article">Ketika Teknologi Mengubah Cara Manusia Menciptakan dan Menikmati Budaya</a></h3>
+            <div class="article-meta"><span>Budaya</span><span>60.190 pembaca</span></div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2>Jelajahi Topik</h2>
+        <p>Temukan artikel yang ingin kamu pelajari.</p>
+      </div>
+      <div class="category-grid">
+        <a class="category-card" href="#"><span class="cat-name">Trending</span><span class="cat-count">291 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Sains</span><span class="cat-count">101 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Teknologi</span><span class="cat-count">272 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Filsafat</span><span class="cat-count">67 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Budaya</span><span class="cat-count">19 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Ekonomi</span><span class="cat-count">112 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Politik</span><span class="cat-count">235 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Geografi</span><span class="cat-count">69 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Seni</span><span class="cat-count">75 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Pendidikan</span><span class="cat-count">240 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Kesehatan</span><span class="cat-count">111 ribu artikel</span></a>
+        <a class="category-card" href="#"><span class="cat-name">Sejarah</span><span class="cat-count">85 ribu artikel</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="journal">
+    <div class="container">
+      <div class="section-top">
+        <div class="section-header">
+          <h2>Jurnal Terbaru</h2>
+          <p>Publikasi akademik dari kontributor dan mitra riset Suaran.</p>
+        </div>
+        <a href="#" class="btn-text">Lihat semua jurnal</a>
+      </div>
+      <div class="journal-list">
+
+        <div class="journal-card">
+          <div>
+            <span class="journal-tag">Vol. 04, No. 02</span>
+            <h3>Literasi Digital dan Kepercayaan Publik terhadap Informasi Daring di Indonesia</h3>
+            <p class="journal-meta">Rina A. Wulandari, Dimas B. Pratama — Diterbitkan September 2026</p>
+          </div>
+          <div class="journal-actions">
+            <a href="#" class="btn btn-sm btn-outline">Abstrak</a>
+            <a href="#" class="btn btn-sm btn-primary">Baca Jurnal</a>
+          </div>
+        </div>
+
+        <div class="journal-card">
+          <div>
+            <span class="journal-tag">Vol. 03, No. 04</span>
+            <h3>Adaptasi Pesisir terhadap Kenaikan Muka Air Laut: Kajian Kota-Kota Pantai Utara Jawa</h3>
+            <p class="journal-meta">Sari C. Handayani, Eko D. Nugroho — Diterbitkan Agustus 2026</p>
+          </div>
+          <div class="journal-actions">
+            <a href="#" class="btn btn-sm btn-outline">Abstrak</a>
+            <a href="#" class="btn btn-sm btn-primary">Baca Jurnal</a>
+          </div>
+        </div>
+
+        <div class="journal-card">
+          <div>
+            <span class="journal-tag">Vol. 03, No. 03</span>
+            <h3>Kecerdasan Buatan dalam Pendidikan Tinggi: Tinjauan Komparatif Kebijakan di Asia Tenggara</h3>
+            <p class="journal-meta">Fajar E. Santoso, Maya F. Lestari — Juli 2026</p>
+          </div>
+          <div class="journal-actions">
+            <a href="#" class="btn btn-sm btn-outline">Abstrak</a>
+            <a href="#" class="btn btn-sm btn-primary">Baca Jurnal</a>
+          </div>
+        </div>
+
+        <div class="journal-card">
+          <div>
+            <span class="journal-tag">Vol. 03, No. 02</span>
+            <h3>Jalur Rempah dalam Historiografi Maritim Nusantara: Sebuah Tinjauan Pustaka</h3>
+            <p class="journal-meta">Bagus G. Wibowo, Citra H. Kusuma — Juni 2026</p>
+          </div>
+          <div class="journal-actions">
+            <a href="#" class="btn btn-sm btn-outline">Abstrak</a>
+            <a href="#" class="btn btn-sm btn-primary">Baca Jurnal</a>
+          </div>
+        </div>
+
+        <div class="journal-card">
+          <div>
+            <span class="journal-tag">Vol. 03, No. 01</span>
+            <h3>Epistemologi Pengetahuan Kolektif: Dari Ensiklopedia Cetak ke Kurasi Terbuka</h3>
+            <p class="journal-meta">Andi I. Rahman, Putri J. Maharani — Mei 2026</p>
+          </div>
+          <div class="journal-actions">
+            <a href="#" class="btn btn-sm btn-outline">Abstrak</a>
+            <a href="#" class="btn btn-sm btn-primary">Baca Jurnal</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div><div class="stat-number">100.000+</div><div class="stat-label">Artikel</div></div>
+        <div><div class="stat-number">8.500+</div><div class="stat-label">Jurnal</div></div>
+        <div><div class="stat-number">120.000+</div><div class="stat-label">Topik</div></div>
+        <div><div class="stat-number">150.000+</div><div class="stat-label">Referensi</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="container newsletter-inner">
+      <h2>Dapatkan tulisan terbaru</h2>
+      <p>Berlangganan untuk menerima artikel dan jurnal terbaru dari Suaran.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <label for="newsletterEmail" class="visually-hidden">Alamat email</label>
+        <input type="email" id="newsletterEmail" placeholder="Alamat email" required>
+        <button type="submit">Berlangganan</button>
+      </form>
+      <p class="newsletter-disclaimer">Dapatkan lebih banyak keuntungan dalam berlangganan dan Anda dapat berhenti berlangganan kapan saja.</p>
+    </div>
+  </section>
+
+  </div>
+  <!-- /view-home -->
+
+
+  <!-- =========================================================
+      HALAMAN ARTIKEL
+      ========================================================= -->
+  <div id="view-article" class="view-panel" style="display:none;">
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="#" data-view="home">Beranda</a> / <a href="#">Sejarah</a> / <span>Konstantinopel</span>
+    </nav>
+  </div>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="eyebrow">Sejarah</span>
+      <h1>Konstantinopel: Kota yang Menghubungkan Dua Benua</h1>
+      <p class="hero-sub">Dari ibu kota Kekaisaran Romawi Timur hingga pusat kekuasaan Utsmaniyah, perjalanan satu kota di tepi Selat Bosporus memperlihatkan bagaimana letak geografis dapat membentuk sejarah dunia.</p>
+      <div class="article-info">
+        <span>Ditulis oleh Redaksi Suaran</span>
+        <span>27 September 2026</span>
+        <span>10 menit membaca</span>
+        <span>ID Artikel: SRN-2026-0927-001</span>
+      </div>
+      <div class="article-tools">
+        <button class="tool-btn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg> Bagikan</button>
+        <button class="tool-btn"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> Simpan</button>
+        <button class="tool-btn"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Cetak</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="article-layout">
+
+      <article class="article-body">
+
+        <h2 id="pendahuluan">Pendahuluan</h2>
+        <p>Tidak banyak kota di dunia yang berdiri tepat di pertemuan dua benua. Konstantinopel, yang kini dikenal sebagai Istanbul, berada di tepi Selat Bosporus, jalur sempit yang memisahkan Eropa dan Asia sekaligus menghubungkan Laut Hitam dengan Laut Mediterania.</p>
+        <p>Posisi inilah yang membuat kota ini bernilai strategis selama lebih dari seribu tahun. Siapa pun yang menguasainya ikut mengendalikan jalur perdagangan, pelayaran, dan pergerakan pasukan antara dua dunia.</p>
+
+        <h2 id="latar-belakang">Latar Belakang</h2>
+        <p>Kota ini dibangun di atas permukiman Yunani kuno bernama Bizantium. Pada tahun 330 M, Kaisar Konstantinus I meresmikannya sebagai ibu kota baru Kekaisaran Romawi, dan namanya kemudian dikenal sebagai Konstantinopel, "kota Konstantinus".</p>
+
+        <blockquote>Sebuah kota tidak menjadi penting karena besarnya, tetapi karena letaknya dan siapa yang berkepentingan untuk menguasainya.</blockquote>
+
+        <p>Ketika bagian barat Kekaisaran Romawi runtuh pada abad ke-5, bagian timur yang berpusat di Konstantinopel bertahan dan berkembang. Para sejarawan modern biasa menyebutnya Kekaisaran Bizantium.</p>
+
+        <h3 id="perkembangan-awal">Perkembangan Awal</h3>
+        <p>Pada masa awal, Konstantinopel tumbuh melalui beberapa tahap penting:</p>
+        <ol>
+          <li>Peresmian sebagai ibu kota baru pada tahun 330 M.</li>
+          <li>Pembangunan tembok-tembok pertahanan yang kemudian diperkuat pada abad ke-5.</li>
+          <li>Pembangunan Hagia Sophia di bawah Kaisar Yustinianus, rampung pada tahun 537 M.</li>
+        </ol>
+
+        <h3 id="perkembangan-modern">Perkembangan Berikutnya</h3>
+        <p>Seiring waktu, kota ini mengalami berbagai peristiwa yang membentuk wajahnya:</p>
+        <ul>
+          <li>Menjadi pusat perdagangan yang menghubungkan Eropa, Asia, dan Afrika Utara.</li>
+          <li>Menjadi pusat kekuasaan gereja Ortodoks Timur.</li>
+          <li>Mengalami pendudukan Pasukan Salib pada tahun 1204 yang melemahkan Bizantium secara permanen.</li>
+          <li>Jatuh ke tangan Kesultanan Utsmaniyah di bawah Sultan Mehmed II pada tahun 1453.</li>
+        </ul>
+
+        <figure>
+          <div class="image-placeholder">Gambar Ilustrasi</div>
+          <figcaption>Gambar 1. Hagia Sophia di Istanbul, bangunan yang berfungsi sebagai gereja, masjid, museum, dan kembali menjadi masjid.</figcaption>
+        </figure>
+
+        <h2 id="pembahasan">Pembahasan</h2>
+        <p>Perjalanan kota ini dapat dilihat dalam tiga periode besar berikut:</p>
+        <table class="article-table">
+          <thead><tr><th>Periode</th><th>Penguasa</th><th>Ciri Utama</th></tr></thead>
+          <tbody>
+            <tr><td>330 – 1204</td><td>Kekaisaran Romawi Timur (Bizantium)</td><td>Ibu kota kekaisaran dan pusat Kristen Ortodoks</td></tr>
+            <tr><td>1204 – 1261</td><td>Pasukan Salib dan Kekaisaran Latin</td><td>Pendudukan dan pelemahan kota</td></tr>
+            <tr><td>1453 – awal abad ke-20</td><td>Kesultanan Utsmaniyah</td><td>Ibu kota kesultanan dan pusat dunia Islam</td></tr>
+          </tbody>
+        </table>
+        <p>Setelah 1453, kota ini tidak ditinggalkan, melainkan dibangun ulang. Gereja-gereja diubah fungsinya, masjid-masjid baru didirikan, dan penduduk dari berbagai latar belakang menetap di sana. Warisan lapisan-lapisan sejarah ini masih terlihat jelas di Istanbul hari ini.</p>
+
+        <h2 id="kesimpulan">Kesimpulan</h2>
+        <p>Sejarah Konstantinopel menunjukkan bahwa geografi sering kali menjadi panggung yang membentuk jalannya peristiwa. Kota ini bertahan karena letaknya, diperebutkan karena letaknya, dan tetap menjadi simpul penting antara Timur dan Barat hingga kini.</p>
+
+        <div class="tags">
+          <a href="#" class="tag">Sejarah</a>
+          <a href="#" class="tag">Bizantium</a>
+          <a href="#" class="tag">Utsmaniyah</a>
+          <a href="#" class="tag">Ensiklopedia</a>
+        </div>
+
+        <section class="references" id="referensi">
+          <h2>Referensi</h2>
+          <ol>
+            <li>[1] Herrin, J. (2007). <em>Byzantium: The Surprising Life of a Medieval Empire</em>. Princeton University Press.</li>
+            <li>[2] Norwich, J. J. (1997). <em>A Short History of Byzantium</em>. Alfred A. Knopf.</li>
+            <li>[3] Runciman, S. (1965). <em>The Fall of Constantinople 1453</em>. Cambridge University Press.</li>
+            <li>[4] Encyclopaedia Britannica. <em>Constantinople</em>. britannica.com.</li>
+          </ol>
+        </section>
+
+        <div class="author-card">
+          <div class="avatar-placeholder">RS</div>
+          <div>
+            <h4>Redaksi Suaran</h4>
+            <p>Tim redaksi yang menyusun artikel berdasarkan sumber ensiklopedis, jurnal, dan lembaga terpercaya.</p>
+          </div>
+        </div>
+
+        <section class="related-section">
+          <h2>Artikel Terkait</h2>
+          <div class="article-grid">
+            <article class="article-card">
+              <span class="eyebrow">Sejarah</span>
+              <h3><a href="#">Hagia Sophia: Satu Bangunan, Banyak Peradaban</a></h3>
+              <p>Bangunan berkubah ini berganti fungsi mengikuti perubahan kekuasaan di sekitarnya.</p>
+              <div class="article-meta"><span>Redaksi Suaran</span><span>24 Sep 2026</span></div>
+              <a href="#" class="btn-text">Baca artikel</a>
+            </article>
+            <article class="article-card">
+              <span class="eyebrow">Geografi</span>
+              <h3><a href="#">Selat yang Menentukan Jalur Perdagangan Dunia</a></h3>
+              <p>Dari Bosporus hingga Malaka, selat sempit sering menjadi titik paling berpengaruh.</p>
+              <div class="article-meta"><span>Redaksi Suaran</span><span>21 Sep 2026</span></div>
+              <a href="#" class="btn-text">Baca artikel</a>
+            </article>
+            <article class="article-card">
+              <span class="eyebrow">Budaya</span>
+              <h3><a href="#">Ketika Imperium Berganti, Apa yang Tetap Tinggal?</a></h3>
+              <p>Bahasa, arsitektur, dan kebiasaan sering bertahan lebih lama daripada penguasanya.</p>
+              <div class="article-meta"><span>Redaksi Suaran</span><span>18 Sep 2026</span></div>
+              <a href="#" class="btn-text">Baca artikel</a>
+            </article>
+          </div>
+        </section>
+
+      </article>
+
+      <aside class="sidebar">
+        <div class="toc-box">
+          <h4>Daftar Isi</h4>
+          <ul class="toc-list">
+            <li><a href="#pendahuluan">Pendahuluan</a></li>
+            <li><a href="#latar-belakang">Latar Belakang</a></li>
+            <li><a href="#perkembangan-awal">Perkembangan Awal</a></li>
+            <li><a href="#perkembangan-modern">Perkembangan Berikutnya</a></li>
+            <li><a href="#pembahasan">Pembahasan</a></li>
+            <li><a href="#kesimpulan">Kesimpulan</a></li>
+            <li><a href="#referensi">Referensi</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-box">
+          <h4>Informasi Artikel</h4>
+          <ul class="meta-list">
+            <li><span>Diterbitkan</span><strong>21 Sep 2026</strong></li>
+            <li><span>Diperbarui</span><strong>27 Sep 2026</strong></li>
+            <li><span>Kategori</span><strong>Sejarah</strong></li>
+            <li><span>ID Artikel</span><strong>SRN-2026-0927-001</strong></li>
+          </ul>
+        </div>
+        <div class="sidebar-box">
+          <h4>Kutip Artikel Ini</h4>
+          <p style="font-size:0.85rem;color:var(--color-gray);">Redaksi Suaran. (2026). <em>Konstantinopel: Kota yang Menghubungkan Dua Benua</em>. Suaran.</p>
+          <button class="btn btn-sm btn-outline" style="width:100%;">Salin Sitasi</button>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  </div>
+  <!-- /view-article -->
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-name">Suaran</span>
+          <p>Jurnal dan ensiklopedia terbuka untuk pengetahuan.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="#" data-view="home">Beranda</a></li>
+            <li><a href="#">Artikel</a></li>
+            <li><a href="#">Jurnal</a></li>
+            <li><a href="#">Kategori</a></li>
+            <li><a href="#">Arsip</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Tentang</h4>
+          <ul>
+            <li><a href="#">Tentang Suaran</a></li>
+            <li><a href="#">Tim Redaksi</a></li>
+            <li><a href="#">Pedoman</a></li>
+            <li><a href="#">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Kebijakan Privasi</a></li>
+            <li><a href="#">Ketentuan Penggunaan</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Suaran. Semua hak dilindungi.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9h4v2a4 4 0 0 1 4-2c3 0 4 2 4 5v7h-4v-6c0-1.5-.5-2.5-2-2.5s-2 1-2 2.5v6h-4z"/></svg></a>
+          <a href="#" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var header = document.getElementById('siteHeader');
+    var burger = document.getElementById('hamburgerBtn');
+    if (burger) {
+      burger.addEventListener('click', function () {
+        var open = header.classList.toggle('nav-open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+    var searchToggle = document.getElementById('searchToggle');
+    if (searchToggle) {
+      searchToggle.addEventListener('click', function () {
+        showView('home');
+        document.getElementById('mainSearch').focus();
+        window.scrollTo({ top: document.querySelector('.search-area').offsetTop - 60, behavior: 'smooth' });
+      });
+    }
+
+    function showView(view) {
+      document.querySelectorAll('.view-panel').forEach(function (panel) {
+        panel.style.display = (panel.id === 'view-' + view) ? '' : 'none';
+      });
+      document.querySelectorAll('.main-nav a').forEach(function (link) {
+        link.classList.toggle('active', link.dataset.view === view && (view === 'article' ? link.textContent.trim() === 'Artikel' : link.textContent.trim() === 'Beranda'));
+      });
+      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+      header.classList.remove('nav-open');
+    }
+
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-view]');
+      if (el) {
+        e.preventDefault();
+        showView(el.dataset.view);
+      }
+    });
+  </script>
+  </body>
+  </html>
